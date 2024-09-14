@@ -1,23 +1,8 @@
-from models import input_parser
+from src.utils import Parser, read_txt_file
 
-input_test = """
-N N0 E:7 W:7 R:10
-N N1 E:2 W:1 R:1
-N N2 E:7 W:6 R:4
-H H0 E:3 W:9 R:2 N2>N0>N1
-H H1 E:4 W:3 R:7 N0>N2>N1
-H H2 E:4 W:0 R:10 N0>N2>N1
-H H3 E:10 W:3 R:8 N2>N0>N1
-H H4 E:6 W:10 R:1 N0>N2>N1
-H H5 E:6 W:7 R:7 N0>N2>N1
-H H6 E:8 W:6 R:9 N2>N1>N0
-H H7 E:7 W:1 R:5 N2>N1>N0
-H H8 E:8 W:2 R:3 N1>N0>N2
-H H9 E:10 W:2 R:1 N1>N2>N0
-H H10 E:6 W:4 R:5 N0>N2>N1
-H H11 E:8 W:4 R:7 N0>N1>N2
-"""
 
-x = input_parser(input_test)
-x.assign_home_buyers()
-print(x.print_results())
+input_data = read_txt_file('data/input.txt')
+parser = Parser(input_data)
+assigner = parser.parse_to_assigner()
+assigner.assign_home_buyers()
+print(assigner.format_results())
