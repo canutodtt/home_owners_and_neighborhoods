@@ -18,13 +18,13 @@ class BaseModel:
         self.resilience = resilience
 
     def __mul__(self, other: 'BaseModel') -> int:
-        return sum(x * y for x, y in zip(self.get_vectors, other.get_vectors))
+        return sum(x * y for x, y in zip(self.vectors, other.vectors))
 
     def __str__(self) -> str:
         return self.name
 
     @property
-    def get_vectors(self) -> tuple[int, ...]:
+    def vectors(self) -> tuple[int, ...]:
         """
         Returns a tuple with EWR vectors in that order
         """
@@ -67,6 +67,8 @@ class HomeBuyer(BaseModel):
         :param neighborhood: neighborhood to match with the home buyer
         :return int: home buyer score for the neighborhood
         """
+        if not isinstance(neighborhood, Neighborhood):
+            raise TypeError(f"input must be an instance of Neighborhood, given {type(neighborhood)}")
         score = self * neighborhood
         self.scores[neighborhood.name] = score
         return score
@@ -98,11 +100,14 @@ class HomeBuyerAssigner:
         """
         Returns the number of home buyers that each neighborhood must have
         :return int: number of home buyers per neighborhood
-        :raises ValueError: if the total number of home buyers per neighborhood is not integer
+        :raises ArithmeticError: if the total number of home buyers per neighborhood is not integer
+        :raises ValueError: if there isn't any neighborhood added
         """
+        if not self.neighborhoods:
+            raise ValueError("No neighborhoods added")
         total = len(self.home_buyers) / len(self.neighborhoods)
         if total % 1 != 0:
-            raise ValueError(
+            raise ArithmeticError(
                 f'Total number of home buyers per neighborhood must be divisible by {len(self.neighborhoods)}, given {len(self.home_buyers)}''.'
             )
         return int(total)

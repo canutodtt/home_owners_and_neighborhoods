@@ -10,11 +10,14 @@ class Parser:
     @staticmethod
     def parse_to_vectors(vectors_text: list[str]) -> tuple[int, ...]:
         try:
-            return tuple(int(vector.split(":")[1]) for vector in vectors_text)
+            vectors = tuple(int(vector.split(":")[1]) for vector in vectors_text)
         except ValueError:
-            raise ValueError(f"Missing Vectors Values: {vectors_text}")
+            raise ValueError(f"Some Values aren't integers: {vectors_text}")
         except IndexError:
-            raise ValueError(f"We require 3 vectors E,W,R given input: {vectors_text}")
+            raise ValueError(f"We require the format [vector]:[integer], given input: {vectors_text}")
+        if len(vectors) != 3:
+            raise ValueError(f"We require 3 vectors E,W,R given: {len(vectors_text)}")
+        return vectors
 
     def parse_to_neighborhood(self, neighborhood_text: str) -> Neighborhood:
         data = neighborhood_text.split(" ")
