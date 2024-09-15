@@ -1,27 +1,6 @@
 # Homeowners and Neighborhoods
 
 ## Exercise
-Pearl Certification benefits homeowners along many different vectors. For purposes of this exercise, we'll call those energy efficiency **E**, water **W**, and resilience **R**. Various home builders are currently building new neighborhoods. Each neighborhood **(N)** scores differently across the different Pearl vectors **(E,W,R)**. For example, Belmont Acres **(N1)** has lots of solar, and great air sealing meaning it's **"E"** score is **10**, but the faucets are just up to code giving it a **"W"** score of **1**. It's resilience is typical for a new Pearl Certified home, so it's **"R"** score is **5**.
-
-Discerning home buyers **(H)** are moving to Charlottesville. Home buyers have fixed goals for each of Energy, Water and Resilience. A home buyer's fit for a neighborhood is calculated by the dot product of the home buyer's goals and the neighborhood scores. Home buyers have a sense of Charlottesville, so have expressed preferences for which neighborhoods they may want to live in.
-
-Your task is to write code to place home buyers in neighborhoods such that once they have moved to Charlottesville, no home buyer could subsequently move to a neighborhood they prefer more and be a better fit for it than any home buyer already in that neighborhood. Further so that no builder is overwhelmed, the number of home buyers should be evenly distributed among the available neighborhoods. (You may assume that the number of home buyers modulo the number of neighborhoods is zero(0).)
-
-You will read your input from a file, and write your output to a file. The input file will have one item (home buyer or neighborhood) per line.
-
-Neighborhood lines start with **'N'**. Neighborhood lines contain the scores of the characteristics of the neighborhood in **'Key:Value'** form. So, Belmont Acres might show up in the input file as:
-
-```N N1 E:10 W:1 R:5```
-
-Home buyer lines start with **'H'**. Home buyer lines contain the goals of the home buyer coded the same as for neighborhood. Home buyer lines also contain neighborhood preferences separated by a 'greater than' symbol indicating that the neighborhood to the left is more preferred than the one to the right. So "AC Capehart" is a high-goal home buyer that prefers Belmont Acres and might show up like this:
-
-```H H9 E:10 W:6 R:8 N1>N2>N3```
-
-The output for your code will be a file with each neighborhood filled with home buyers and the score for that home buyer in that neighborhood. So code in which AC Capehart **(H9)** was placed with other home buyers **(H2 and H4)** in Belmont Acres **(N1)** would show up like this: 
-
-```N1: H9(146) H2(128) H4(122)```
-
-Below is sample input and the expected output from that input:
 
 ### Input:
 ```
